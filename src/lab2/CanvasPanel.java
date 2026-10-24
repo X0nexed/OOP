@@ -19,16 +19,12 @@ public class CanvasPanel extends JPanel {
             shapes[i].draw(g2d);
         }
 
-        for (int i = 0; i < shapeCount; i++) {
-            shapes[i].draw(g2d);
-        }
-
         if (currentShape != null) {
             float[] dash = {10.0f, 5.0f};
             BasicStroke dashed = new BasicStroke(1.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, dash, 0.0f);
 
             g2d.setStroke(dashed);
-            currentShape.draw(g2d);
+            currentShape.drawRubber(g2d);
             g2d.setStroke(new BasicStroke());
         }
     }

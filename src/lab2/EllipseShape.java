@@ -17,4 +17,13 @@ public class EllipseShape extends Shape {
         g2d.drawOval(topX,topY,width,height);
 
     }
+    @Override
+    public void drawRubber(Graphics2D g2d) {
+        int topX = Math.min(x1, x2);
+        int topY = Math.min(y1, y2);
+        int width = Math.abs(x2 - x1);
+        int height = Math.abs(y2 - y1);
+        g2d.setColor(Color.BLACK);
+        g2d.drawOval(topX, topY, width, height);
+    }
 }

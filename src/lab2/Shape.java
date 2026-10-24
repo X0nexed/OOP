@@ -14,4 +14,8 @@ public abstract class Shape {
         this.y2 = y2;
     }
     public abstract void draw(Graphics2D g2d);
+   public void drawRubber(Graphics2D g2d){
+
+   }
 }
+
