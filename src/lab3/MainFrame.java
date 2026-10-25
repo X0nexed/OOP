@@ -1,6 +1,7 @@
 package lab3;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class MainFrame extends JFrame {
     private CanvasPanel canvasPanel;
@@ -15,38 +16,50 @@ public class MainFrame extends JFrame {
         add(canvasPanel, BorderLayout.CENTER);
 
         JMenuBar menuBar = new JMenuBar();
+        JMenu objectsMenu_file = new JMenu("Файл");
         JMenu objectsMenu = new JMenu("Об'єкти");
+        JMenu objectsMenu_text = new JMenu("Довідка");
+
+        menuBar.add(objectsMenu_file);
         menuBar.add(objectsMenu);
+        menuBar.add(objectsMenu_text);
 
-
-        JMenuItem pointItem = new JMenuItem("Крапка");
-        objectsMenu.add(pointItem);
-        pointItem.addActionListener(e -> {
+        JRadioButton checkItem_point = new JRadioButton("Крапка");
+        checkItem_point.setSelected(true);
+        objectsMenu.add(checkItem_point);
+        checkItem_point.addActionListener(e -> {
             canvasPanel.setMode(1);
             setTitle("Крапка");
         });
 
 
-        JMenuItem lineItem = new JMenuItem("Лінія");
-        objectsMenu.add(lineItem);
-        lineItem.addActionListener(e -> {
+        JRadioButton checkItem_line = new JRadioButton("лінія");
+        checkItem_line .setSelected(false);
+        objectsMenu.add(checkItem_line );
+        checkItem_line .addActionListener(e -> {
             canvasPanel.setMode(2);
             setTitle("Лінія");
         });
 
-        JMenuItem rectItem = new JMenuItem("Прямокутник");
-        objectsMenu.add(rectItem);
-        rectItem.addActionListener(e -> {
+        JRadioButton checkItem_rect = new JRadioButton("Прямокутник");
+        objectsMenu.add(checkItem_rect);
+        checkItem_rect.addActionListener(e -> {
             canvasPanel.setMode(3);
             setTitle("Прямокутник");
         });
 
-        JMenuItem ellipseItem = new JMenuItem("Еліпс");
-        objectsMenu.add(ellipseItem);
-        ellipseItem.addActionListener(e -> {
+        JRadioButton checkItem_ellipse = new JRadioButton("Еліпс");
+        objectsMenu.add(checkItem_ellipse);
+        checkItem_ellipse.addActionListener(e -> {
             canvasPanel.setMode(4);
             setTitle("Еліпс");
         });
+
+        ButtonGroup group = new ButtonGroup();
+        group.add(checkItem_point);
+        group.add(checkItem_line);
+        group.add(checkItem_rect);
+        group.add(checkItem_ellipse);
 
         setJMenuBar(menuBar);
     }
