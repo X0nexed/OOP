@@ -27,15 +27,15 @@ public class MainFrame extends JFrame {
         JRadioButton checkItem_point = new JRadioButton("Крапка");
         checkItem_point.setSelected(true);
         objectsMenu.add(checkItem_point);
+            checkItem_point.setToolTipText("Це крапка ;)");
         checkItem_point.addActionListener(e -> {
             canvasPanel.setMode(1);
             setTitle("Крапка");
         });
 
-
         JRadioButton checkItem_line = new JRadioButton("лінія");
-        checkItem_line .setSelected(false);
-        objectsMenu.add(checkItem_line );
+        objectsMenu.add(checkItem_line);
+        checkItem_line.setToolTipText("А це лінія ;)");
         checkItem_line .addActionListener(e -> {
             canvasPanel.setMode(2);
             setTitle("Лінія");
@@ -43,17 +43,60 @@ public class MainFrame extends JFrame {
 
         JRadioButton checkItem_rect = new JRadioButton("Прямокутник");
         objectsMenu.add(checkItem_rect);
+        checkItem_rect.setToolTipText("тут вже прямокутник \uD83D\uDE1B ");
         checkItem_rect.addActionListener(e -> {
             canvasPanel.setMode(3);
             setTitle("Прямокутник");
         });
 
         JRadioButton checkItem_ellipse = new JRadioButton("Еліпс");
+        checkItem_ellipse.setToolTipText("ну тут вже цілий Еліпс \uD83D\uDE1D ");
         objectsMenu.add(checkItem_ellipse);
         checkItem_ellipse.addActionListener(e -> {
             canvasPanel.setMode(4);
             setTitle("Еліпс");
         });
+
+        JToolBar toolbar = new JToolBar();
+        JPanel panel = new JPanel();
+        toolbar.add(panel);
+        setJMenuBar(menuBar);
+        add(toolbar, BorderLayout.NORTH);
+
+        JRadioButton point = new JRadioButton("Крапка");
+        point.setToolTipText("Це крапка ;)");
+        point.addActionListener(e -> {
+            canvasPanel.setMode(1);
+            setTitle("Крапка");
+        });
+
+        JRadioButton line = new JRadioButton("лінія");
+        line.setToolTipText("А це лінія ;)");
+        line.addActionListener(e ->{
+            canvasPanel.setMode(2);
+            setTitle("Лінія");
+
+        });
+
+        JRadioButton rect = new JRadioButton("прямкутник");
+        rect.setToolTipText("тут вже прямокутник \uD83D\uDE1B ");
+        rect.addActionListener(e -> {
+            canvasPanel.setMode(3);
+            setTitle("Прямокутник");
+        });
+
+        JRadioButton Ellipse = new JRadioButton("Еліпс");
+        Ellipse.setToolTipText("ну тут вже цілий Еліпс \uD83D\uDE1D ");
+        Ellipse.addActionListener(e -> {
+            canvasPanel.setMode(4);
+            setTitle("Еліпс");
+        });
+
+        panel.add(point);
+        panel.add(line);
+        panel.add(rect);
+        panel.add(Ellipse);
+        panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
 
         ButtonGroup group = new ButtonGroup();
         group.add(checkItem_point);
@@ -61,6 +104,10 @@ public class MainFrame extends JFrame {
         group.add(checkItem_rect);
         group.add(checkItem_ellipse);
 
-        setJMenuBar(menuBar);
+        ButtonGroup group_tool = new ButtonGroup();
+        group_tool.add(point);
+        group_tool.add(line);
+        group_tool.add(rect);
+        group_tool.add(Ellipse);
     }
 }
