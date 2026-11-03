@@ -1,4 +1,5 @@
-package lab3;
+package lab3.shapes;
+
 import java.awt.*;
 
 public class LineShape extends Shape {

@@ -1,12 +1,15 @@
 package lab3;
 
+import lab3.shapes.*;
+import lab3.shapes.Shape;
+
 import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class CanvasPanel extends JPanel {
-    private Shape[] shapes = new Shape[112];
+    private lab3.shapes.Shape[] shapes = new lab3.shapes.Shape[112];
     private int shapeCount = 0;
     private Shape currentShape = null;
     private int currentMode = 1;

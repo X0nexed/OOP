@@ -23,91 +23,34 @@ public class MainFrame extends JFrame {
         menuBar.add(objectsMenu_file);
         menuBar.add(objectsMenu);
         menuBar.add(objectsMenu_text);
-
-        JRadioButton checkItem_point = new JRadioButton("Крапка");
-        checkItem_point.setSelected(true);
-        objectsMenu.add(checkItem_point);
-            checkItem_point.setToolTipText("Це крапка ;)");
-        checkItem_point.addActionListener(e -> {
-            canvasPanel.setMode(1);
-            setTitle("Крапка");
-        });
-
-        JRadioButton checkItem_line = new JRadioButton("лінія");
-        objectsMenu.add(checkItem_line);
-        checkItem_line.setToolTipText("А це лінія ;)");
-        checkItem_line .addActionListener(e -> {
-            canvasPanel.setMode(2);
-            setTitle("Лінія");
-        });
-
-        JRadioButton checkItem_rect = new JRadioButton("Прямокутник");
-        objectsMenu.add(checkItem_rect);
-        checkItem_rect.setToolTipText("тут вже прямокутник \uD83D\uDE1B ");
-        checkItem_rect.addActionListener(e -> {
-            canvasPanel.setMode(3);
-            setTitle("Прямокутник");
-        });
-
-        JRadioButton checkItem_ellipse = new JRadioButton("Еліпс");
-        checkItem_ellipse.setToolTipText("ну тут вже цілий Еліпс \uD83D\uDE1D ");
-        objectsMenu.add(checkItem_ellipse);
-        checkItem_ellipse.addActionListener(e -> {
-            canvasPanel.setMode(4);
-            setTitle("Еліпс");
-        });
+        setJMenuBar(menuBar);
 
         JToolBar toolbar = new JToolBar();
         JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         toolbar.add(panel);
-        setJMenuBar(menuBar);
         add(toolbar, BorderLayout.NORTH);
 
-        JRadioButton point = new JRadioButton("Крапка");
-        point.setToolTipText("Це крапка ;)");
-        point.addActionListener(e -> {
-            canvasPanel.setMode(1);
-            setTitle("Крапка");
-        });
-
-        JRadioButton line = new JRadioButton("лінія");
-        line.setToolTipText("А це лінія ;)");
-        line.addActionListener(e ->{
-            canvasPanel.setMode(2);
-            setTitle("Лінія");
-
-        });
-
-        JRadioButton rect = new JRadioButton("прямкутник");
-        rect.setToolTipText("тут вже прямокутник \uD83D\uDE1B ");
-        rect.addActionListener(e -> {
-            canvasPanel.setMode(3);
-            setTitle("Прямокутник");
-        });
-
-        JRadioButton Ellipse = new JRadioButton("Еліпс");
-        Ellipse.setToolTipText("ну тут вже цілий Еліпс \uD83D\uDE1D ");
-        Ellipse.addActionListener(e -> {
-            canvasPanel.setMode(4);
-            setTitle("Еліпс");
-        });
-
-        panel.add(point);
-        panel.add(line);
-        panel.add(rect);
-        panel.add(Ellipse);
-        panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
+        ModeAction[] actions = new ModeAction[4];
+        actions[0] = new ModeAction("Крапка", "Це крапка", 1, canvasPanel);
+        actions[1] = new ModeAction("Лінія", "Лінія за двома точками", 2, canvasPanel);
+        actions[2] = new ModeAction("Прямокутник", "Прямокутник за двома кутами", 3, canvasPanel);
+        actions[3] = new ModeAction("Еліпс", "Еліпс від центру до кута", 4, canvasPanel);
+        actions[0].putValue(Action.SELECTED_KEY, Boolean.TRUE);
 
         ButtonGroup group = new ButtonGroup();
-        group.add(checkItem_point);
-        group.add(checkItem_line);
-        group.add(checkItem_rect);
-        group.add(checkItem_ellipse);
-
         ButtonGroup group_tool = new ButtonGroup();
-        group_tool.add(point);
-        group_tool.add(line);
-        group_tool.add(rect);
-        group_tool.add(Ellipse);
-    }
-}
+
+        for (ModeAction action : actions) {
+            JRadioButtonMenuItem menuItem = new JRadioButtonMenuItem(action);
+            objectsMenu.add(menuItem);
+            group.add(menuItem);
+        }
+
+
+        for (ModeAction action : actions) {
+            JRadioButton btn = new JRadioButton(action);
+            panel.add(btn);
+            group_tool.add(btn);
+        }
+    }}
