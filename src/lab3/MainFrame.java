@@ -24,7 +24,11 @@ public class MainFrame extends JFrame {
         menuBar.add(objectsMenu);
         menuBar.add(objectsMenu_text);
         setJMenuBar(menuBar);
-
+        JMenuItem about = new JMenuItem("Звіт");
+        objectsMenu_text.add(about);
+        about.addActionListener(e -> {
+            JOptionPane.showMessageDialog(this, "Прокопцов Кірілл ім-о51\n Lab№3", "Звіт", JOptionPane.INFORMATION_MESSAGE);
+        });
         JToolBar toolbar = new JToolBar();
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
