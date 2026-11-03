@@ -1,4 +1,4 @@
-package lab3;
+package lab2;
 import java.awt.*;
 
 public class PointShape extends Shape {
