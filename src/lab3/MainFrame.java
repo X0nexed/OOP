@@ -2,6 +2,7 @@ package lab3;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
 
 public class MainFrame extends JFrame {
     private CanvasPanel canvasPanel;
@@ -42,18 +43,28 @@ public class MainFrame extends JFrame {
         actions[3] = new ModeAction("Еліпс", "Еліпс від центру до кута", 4, canvasPanel);
         actions[0].putValue(Action.SELECTED_KEY, Boolean.TRUE);
 
+        ImageIcon Point = new ImageIcon(getClass().getResource("icons/Point.png"));
+        ImageIcon Ellipse = new ImageIcon(getClass().getResource("icons/ellipse.png"));
+        ImageIcon rectangle = new ImageIcon(getClass().getResource("icons/rectangle.png"));
+        ImageIcon line = new ImageIcon(getClass().getResource("icons/Line.png"));
+
+        actions[0].putValue(Action.SMALL_ICON, Point);
+        actions[1].putValue(Action.SMALL_ICON, line);
+        actions[2].putValue(Action.SMALL_ICON, rectangle);
+        actions[3].putValue(Action.SMALL_ICON, Ellipse);
+
         ButtonGroup group = new ButtonGroup();
         ButtonGroup group_tool = new ButtonGroup();
 
         for (ModeAction action : actions) {
-            JRadioButtonMenuItem menuItem = new JRadioButtonMenuItem(action);
+            JToggleButton menuItem = new JToggleButton(action);
             objectsMenu.add(menuItem);
             group.add(menuItem);
         }
-
-
         for (ModeAction action : actions) {
-            JRadioButton btn = new JRadioButton(action);
+            JToggleButton btn = new JToggleButton(action);
+            btn.setHideActionText(true);
+            btn.setFocusable(false);
             panel.add(btn);
             group_tool.add(btn);
         }
