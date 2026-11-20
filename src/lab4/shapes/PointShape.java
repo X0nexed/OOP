@@ -1,8 +1,11 @@
-package lab3.shapes;
+package lab4.shapes;
 
 import java.awt.*;
 
 public class PointShape extends Shape {
+    public PointShape() {
+    }
+
     public PointShape(int x1, int y1, int x2, int y2) {
         super(x1, y1, x2, y2);
     }
@@ -10,6 +13,6 @@ public class PointShape extends Shape {
     @Override
     public void draw(Graphics2D g2d) {
         g2d.setColor(Color.BLACK);
-        g2d.fillOval(x1,y1,5,5);
+        g2d.fillOval(x1, y1, 5, 5);
     }
 }

@@ -1,84 +1,37 @@
-package lab3;
+package lab4;
 
-import lab3.shapes.*;
-import lab3.shapes.Shape;
-
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 public class CanvasPanel extends JPanel {
-    private lab3.shapes.Shape[] shapes = new lab3.shapes.Shape[112];
-    private int shapeCount = 0;
-    private Shape currentShape = null;
-    private int currentMode = 1;
-
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
-        for (int i = 0; i < shapeCount; i++) {
-            shapes[i].draw(g2d);
-        }
-
-        if (currentShape != null) {
-            float[] dash = {10.0f, 5.0f};
-            currentShape.drawRubber(g2d);
-            g2d.setStroke(new BasicStroke());
-        }
+        MyEditor.INSTANCE.onPaint(g);
     }
 
     public CanvasPanel() {
         MouseAdapter mouseHandler = new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                int x = e.getX();
-                int y = e.getY();
-                switch (currentMode) {
-                    case 1:
-                        currentShape = new PointShape(x, y, x, y);
-                        break;
-                    case 2:
-                        currentShape = new LineShape(x, y, x, y);
-                        break;
-                    case 3:
-                        currentShape = new RectShape(x, y, x, y);
-                        break;
-                    case 4:
-                        currentShape = new EllipseShape(x, y, x, y);
-                        break;
-                }
+                MyEditor.INSTANCE.onLBdown(e.getX(), e.getY());
+                repaint();
             }
 
             @Override
             public void mouseDragged(MouseEvent e) {
-                int x2 = e.getX();
-                int y2 = e.getY();
-                if (currentShape != null) {
-                    currentShape.setEnd(e.getX(), e.getY());
-                    repaint();
-                }
+                MyEditor.INSTANCE.onMouseMove(e.getX(), e.getY());
+                repaint();
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                if (currentShape != null) {
-                    currentShape.setEnd(e.getX(), e.getY());
-                    if (shapeCount < shapes.length) {
-                        shapes[shapeCount] = currentShape;
-                        shapeCount++;
-                    }
-                    currentShape = null;
-                    repaint();
-
-                }
+                MyEditor.INSTANCE.onLBup(e.getX(), e.getY());
+                repaint();
             }
         };
         addMouseListener(mouseHandler);
         addMouseMotionListener(mouseHandler);
-    }
-    public void setMode(int mode) {
-        this.currentMode = mode;
     }
 }
